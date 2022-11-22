@@ -8,14 +8,13 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.ToggleButton
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fun sortowanie(arr:IntArray):IntArray{
+        fun sortowanie(arr:ArrayList<Int>) {
             var swap = true
             while(swap){
                 swap = false
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            return arr
         }
 
         //Liczby
@@ -61,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         val random = findViewById<Button>(R.id.random)
         val sort_table = findViewById<TextView>(R.id.textarea)
 
+
         random.setOnClickListener {
             tx1.text = Random.nextInt(0,9).toString()
             tx2.text = Random.nextInt(0,9).toString()
@@ -74,52 +73,46 @@ class MainActivity : AppCompatActivity() {
         }
 
         sort.setOnClickListener {
+            val sortTable = ArrayList<Int>()
 
+            sort_table.text = ""
 
-            if(bt1.isSaveEnabled){
-                sort_table.append(tx1.text)
-                sort_table.append(",")
+            if(bt1.isChecked){
+                sortTable.add(tx1.text.toString().toInt())
             }
-            if(bt2.text=="ON"){
-                sort_table.append(tx2.text)
-                sort_table.append(",")
+            if(bt2.isChecked){
+                sortTable.add(tx2.text.toString().toInt())
             }
-            if(bt2.text=="ON"){
-                sort_table.append(tx3.text)
-                sort_table.append(",")
+            if(bt3.isChecked){
+                sortTable.add(tx3.text.toString().toInt())
             }
-            if(bt4.text=="ON"){
-                sort_table.append(tx4.text)
-                sort_table.append(",")
+            if(bt4.isChecked){
+                sortTable.add(tx4.text.toString().toInt())
             }
-            if(bt5.isSaveEnabled){
-                sort_table.append(tx5.text)
-                sort_table.append(",")
+            if(bt5.isChecked){
+                sortTable.add(tx5.text.toString().toInt())
             }
-            if(bt6.text=="ON"){
-                sort_table.append(tx6.text)
-                sort_table.append(",")
+            if(bt6.isChecked){
+                sortTable.add(tx6.text.toString().toInt())
             }
-            if(bt7.text=="ON"){
-                sort_table.append(tx7.text)
-                sort_table.append(",")
+            if(bt7.isChecked){
+                sortTable.add(tx7.text.toString().toInt())
             }
-            if(bt8.text=="ON"){
-                sort_table.append(tx8.text)
-                sort_table.append(",")
+            if(bt8.isChecked){
+                sortTable.add(tx8.text.toString().toInt())
             }
-            if(bt9.text=="ON"){
-                sort_table.append(tx9.text)
-                sort_table.append(",")
+            if(bt9.isChecked){
+                sortTable.add(tx9.text.toString().toInt())
             }
 
+            sortowanie(sortTable)
+
+            for(elem in sortTable)
+            {
+                sort_table.text = sort_table.text.toString() + elem.toString() + ", "
+            }
         }
 
-        //Sortowanie
-        sort.setOnClickListener {
-            val lista = sortowanie(intArrayOf(sort_table.text.toString().toInt()))
-            sort_table.text = lista.toString()
-        }
 
     }
 }
